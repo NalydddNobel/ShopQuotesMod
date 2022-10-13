@@ -17,16 +17,16 @@ namespace ShopQuotesMod
         public Func<Color> ColorMethod;
         public Func<Asset<Texture2D>> HeadTexture;
 
-        public List<Func<string>> FindDefaultText;
+        public List<Func<int, string>> FindDefaultText;
 
         private readonly Dictionary<int, IQuoteProvider> Text;
         private readonly Mod Mod;
 
         internal QuoteData(Mod mod, int npcID, string defaultKey = "Mods.ShopQuotesMod.")
         {
-            DefaultKey = $"{defaultKey}{ShopQuotesMod.GetNPCKeyName(npcID)}.";
-            NPCid = npcID;
             Mod = mod;
+            DefaultKey = $"{defaultKey}{ShopQuotesMod.GetNPCKeyName(npcID, mod)}.";
+            NPCid = npcID;
             Text = new Dictionary<int, IQuoteProvider>();
             ColorMethod = () => Color.White;
         }
@@ -42,7 +42,7 @@ namespace ShopQuotesMod
             {
                 foreach (var defaultMethod in FindDefaultText)
                 {
-                    string defaultText = defaultMethod();
+                    string defaultText = defaultMethod(itemID);
                     if (defaultText != null)
                         return defaultText;
                 }
@@ -141,10 +141,10 @@ namespace ShopQuotesMod
             return this;
         }
 
-        public QuoteData AddDefaultText(Func<string> findDefault)
+        public QuoteData AddDefaultText(Func<int, string> findDefault)
         {
             if (FindDefaultText == null)
-                FindDefaultText = new List<Func<string>>();
+                FindDefaultText = new List<Func<int, string>>();
 
             FindDefaultText.Add(findDefault);
             return this;

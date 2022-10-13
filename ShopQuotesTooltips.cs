@@ -47,7 +47,7 @@ namespace ShopQuotesMod
             string text = null;
             var color = Color.White;
             var database = ModContent.GetInstance<QuoteDatabase>();
-            database.Load();
+
             if (database.TryGetValue(talkNPC.type, out var quotes))
             {
                 try

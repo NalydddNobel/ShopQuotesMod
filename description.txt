@@ -1,1 +1,3 @@
-Town NPC Shop Text is a pretty cool mod, it does...this. Modify this file with a description of your mod.
+This mod makes town NPCs show special shop text when hovering over their items!
+
+This was originally a built-in feature of the Aequus mod, however it has been split off into its own separate mod in-case other mods want this feature!

@@ -155,7 +155,7 @@ namespace ShopQuotesMod
                 try
                 {
                     AddNPC(fargowiltas.Find<ModNPC>("Squirrel").Type)
-                        .AddDefaultText(() => Language.GetTextValue("Mods.Mods.ShopQuotesMod.Fargowiltas_Squirrel"))
+                        .AddDefaultText((i) => Language.GetTextValue("Mods.Mods.ShopQuotesMod.Fargowiltas_Squirrel"))
                         .UseColor(Color.Gray * 1.66f);
                 }
                 catch
@@ -186,7 +186,7 @@ namespace ShopQuotesMod
             {
                 return quote;
             }
-            database.Add(npc, new QuoteData(Mod, npc, defaultKey != null ? defaultKey : "Mods.ShopQuotesMod."));
+            database.Add(npc, new QuoteData(mod, npc, defaultKey != null ? defaultKey : "Mods.ShopQuotesMod."));
             return this[npc];
         }
         internal QuoteData AddNPC(int npc, string defaultKey = null)
