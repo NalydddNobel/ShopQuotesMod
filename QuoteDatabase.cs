@@ -26,6 +26,33 @@ namespace ShopQuotesMod
         public override void Load()
         {
             database = new Dictionary<int, QuoteData>();
+            
+            AddNPC(NPCID.TravellingMerchant)
+                .AddDefaultText((i) =>
+                {
+                    if (ContentSamples.ItemsByType.TryGetValue(i, out var item) && 
+                        (Main.vanityPet[item.buffType] || Main.lightPet[item.buffType]))
+                    {
+                        return Language.GetTextValue("Mods.ShopQuotesMod.TravellingMerchant.AnyPet");
+                    }
+                    return null;
+                })
+                .AddDefaultText((i) =>
+                {
+                    if (ContentSamples.ItemsByType.TryGetValue(i, out var item) && item.frontSlot > 0)
+                    {
+                        return Language.GetTextValue("Mods.ShopQuotesMod.TravellingMerchant.AnyCloak");
+                    }
+                    return null;
+                })
+                .SetQuoteBatch(new int[] { ItemID.StarPrincessCrown, ItemID.StarPrincessDress, ItemID.CelestialWand }, "Mods.ShopQuotesMod.TravellingMerchant.CelestialWandAndStarPrincessSet")
+                .SetQuoteBatch(new int[] { ItemID.GameMasterShirt, ItemID.GameMasterPants, }, () =>
+                {
+                    return Language.GetTextValue($"Mods.ShopQuotesMod.TravellingMerchant.GameMasterSet{(Main.masterMode ? "_Master" : "")}");
+                })
+                .SetQuoteBatch(new int[] { ItemID.ChefHat, ItemID.ChefShirt, ItemID.ChefPants }, () => Language.GetTextValueWith("Mods.ShopQuotesMod.TravellingMerchant.ChefSet", new { World = Main.worldName, }))
+                .UseColor(new Color(130, 128, 255));
+
             AddNPC(NPCID.Merchant)
                 .SetQuote(ItemID.PiggyBank, () => Language.GetTextValue($"Mods.ShopQuotesMod.Merchant.PiggyBank{(Main.GetMoonPhase() == MoonPhase.Full && LanternNight.LanternsUp ? "_Goober" : "")}"))
                 .SetQuote(ItemID.DiscoBall, () =>
@@ -47,18 +74,18 @@ namespace ShopQuotesMod
                     string merchant = NPC.GetFirstNPCNameOrNull(NPCID.Merchant);
                     if (merchant != null)
                     {
-                        return Language.GetTextValueWith($"Mods.ShopQuotesMod.Merchant.DiscoBall_Merchant", new { Merchant = merchant, });
+                        return Language.GetTextValueWith($"Mods.ShopQuotesMod.ArmsDealer.Nail_Merchant", new { Merchant = merchant, });
                     }
-                    return Language.GetTextValue($"Mods.ShopQuotesMod.Merchant.DiscoBall");
+                    return Language.GetTextValue($"Mods.ShopQuotesMod.ArmsDealer.Nail");
                 })
                 .SetQuoteBatch(new int[] { ItemID.NurseHat, ItemID.NurseShirt, ItemID.NursePants, }, () =>
                 {
                     string nurse = NPC.GetFirstNPCNameOrNull(NPCID.Nurse);
                     if (nurse != null)
                     {
-                        return Language.GetTextValueWith($"Mods.ShopQuotesMod.Merchant.NurseOutfit_Nurse", new { Nurse = nurse, });
+                        return Language.GetTextValueWith($"Mods.ShopQuotesMod.ArmsDealer.NurseOutfit_Nurse", new { Nurse = nurse, });
                     }
-                    return Language.GetTextValue($"Mods.ShopQuotesMod.Merchant.NurseOutfit");
+                    return Language.GetTextValue($"Mods.ShopQuotesMod.ArmsDealer.NurseOutfit");
                 })
                 .UseColor(Color.Gray * 1.45f);
             AddNPC(NPCID.Demolitionist)
