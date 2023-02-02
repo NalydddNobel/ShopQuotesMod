@@ -29,10 +29,10 @@ namespace ShopQuotesMod
 
         public override bool PreDrawTooltipLine(Item item, DrawableTooltipLine line, ref int yOffset)
         {
+            if (line.Name == null)
+                return true;
             if (line.Name.StartsWith("Fake"))
-            {
                 return false;
-            }
             if (line.Name == "ShopQuote")
             {
                 DrawShopQuote(line, Main.npc[Main.LocalPlayer.talkNPC]);
