@@ -29,6 +29,10 @@ namespace ShopQuotesMod
 
         public override bool PreDrawTooltipLine(Item item, DrawableTooltipLine line, ref int yOffset)
         {
+            if (string.IsNullOrEmpty(line.Name)) {
+                return true;
+            }
+
             if (line.Name.StartsWith("Fake"))
             {
                 return false;
@@ -78,6 +82,8 @@ namespace ShopQuotesMod
 
         public static void DrawShopQuote(string text, int x, int y, float rotation, Vector2 origin, Vector2 baseScale, Color color, NPC npc)
         {
+            bool trueTooltipsEnabled = ModLoader.TryGetMod("TrueTooltips", out _);
+
             var statusBubble = ModContent.Request<Texture2D>($"{nameof(ShopQuotesMod)}/StatusBubble").Value;
             var chatBubbleFrame = statusBubble.Frame();
             var chatBubbleScale = baseScale * 0.9f;
@@ -85,6 +91,10 @@ namespace ShopQuotesMod
             var chatBubblePosition = new Vector2(x + chatBubbleFrame.Width / 2f * chatBubbleScale.X, y + chatBubbleFrame.Height / 2f * chatBubbleScale.Y);
 
             var headTexture = GetHeadTexture(npc);
+
+            if (trueTooltipsEnabled) {
+                chatBubblePosition.X -= 16f;
+            }
 
             if (headTexture != null)
             {
@@ -105,8 +115,7 @@ namespace ShopQuotesMod
             }
 
 
-            if (ModLoader.TryGetMod("TrueTooltips", out _))
-            {
+            if (trueTooltipsEnabled) {
                 return;
             }
 

@@ -16,17 +16,12 @@ namespace ShopQuotesMod
     /// </summary>
     public class QuoteDatabase : ModSystem
     {
-        private Dictionary<int, QuoteData> database;
-
-        public QuoteDatabase()
-        {
-            database = new Dictionary<int, QuoteData>();
-        }
+        private readonly Dictionary<int, QuoteData> database = new();
 
         public override void Load()
         {
-            database = new Dictionary<int, QuoteData>();
-            
+            database.Clear();
+
             AddNPC(NPCID.TravellingMerchant)
                 .AddDefaultText((i) =>
                 {
@@ -207,18 +202,22 @@ namespace ShopQuotesMod
         /// <param name="npc"></param>
         /// <param name="mod"></param>
         /// <returns></returns>
-        public QuoteData AddNPC(int npc, Mod mod, string defaultKey = null)
+        public QuoteData AddOrGetNPC(int npc, Mod mod, string defaultKey = null)
         {
             if (TryGetValue(npc, out var quote))
             {
                 return quote;
             }
-            database.Add(npc, new QuoteData(mod, npc, defaultKey != null ? defaultKey : "Mods.ShopQuotesMod."));
+            if (string.IsNullOrEmpty(defaultKey)
+                && ShopQuotesMod.AutomaticLocalizationPaths.TryGetValue(mod, out string defaultKeyOverride)) {
+                defaultKey = defaultKeyOverride;
+            }
+            database.Add(npc, new QuoteData(mod, npc, defaultKey ?? $"Mods.{mod.Name}."));
             return this[npc];
         }
         internal QuoteData AddNPC(int npc, string defaultKey = null)
         {
-            return AddNPC(npc, ShopQuotesMod.Instance, defaultKey);
+            return AddOrGetNPC(npc, ModContent.GetInstance<ShopQuotesMod>(), defaultKey);
         }
     }
 }

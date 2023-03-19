@@ -12,9 +12,9 @@ namespace ShopQuotesMod
 {
     public class QuoteData
     {
-        public int NPCid { get; set; }
+        public int NPCID { get; set; }
         public readonly string DefaultKey;
-        public Func<Color> ColorMethod;
+        public Func<QuoteData, int, int, Color> ColorMethod;
         public Func<Asset<Texture2D>> HeadTexture;
 
         public List<Func<int, string>> FindDefaultText;
@@ -26,16 +26,16 @@ namespace ShopQuotesMod
         {
             Mod = mod;
             DefaultKey = $"{defaultKey}{ShopQuotesMod.GetNPCKeyName(npcID, mod)}.";
-            NPCid = npcID;
+            NPCID = npcID;
             Text = new Dictionary<int, IQuoteProvider>();
-            ColorMethod = () => Color.White;
+            ColorMethod = (parent, npcID, itemID) => Color.White;
         }
 
         public string GetQuote(NPC npc, int itemID)
         {
             if (Text.TryGetValue(itemID, out var result))
             {
-                return result.GetQuote();
+                return result.GetQuote(this, npc.type, itemID);
             }
 
             if (FindDefaultText != null)
@@ -53,12 +53,16 @@ namespace ShopQuotesMod
             return key != text ? text : null;
         }
 
+        public Color GetTextColor(int npcID, int itemID) {
+            if (Text.TryGetValue(itemID, out var result))
+                return result.GetTextColor(this, npcID, itemID);
+
+            return ColorMethod(this, npcID, itemID);
+        }
+
         public Color GetTextColor(NPC npc, int itemID)
         {
-            if (Text.TryGetValue(itemID, out var result))
-                return result.GetTextColor();
-
-            return ColorMethod();
+            return GetTextColor(npc.type, itemID);
         }
 
         public Asset<Texture2D> GetHeadTexture(NPC npc)
@@ -77,25 +81,25 @@ namespace ShopQuotesMod
 
         public QuoteData SetQuote(int itemID, string customKey)
         {
-            Text[itemID] = new QuoteProvider(this, itemID, customKey);
+            Text[itemID] = new QuoteProvider(customKey);
             return this;
         }
 
         public QuoteData SetQuote(int itemID, Func<string> customKey)
         {
-            Text[itemID] = new FuncQuoteProvider(this, itemID, customKey);
+            Text[itemID] = new FuncQuoteProvider(customKey);
             return this;
         }
 
         public QuoteData SetQuote(int itemID, string customKey, object[] parameters)
         {
-            Text[itemID] = new FuncQuoteProvider(this, itemID, () => Language.GetTextValue(customKey, parameters));
+            Text[itemID] = new FuncQuoteProvider(() => Language.GetTextValue(customKey, parameters));
             return this;
         }
 
         public QuoteData SetQuoteWith(int itemID, string customKey, object with)
         {
-            Text[itemID] = new FuncQuoteProvider(this, itemID, () => Language.GetTextValueWith(customKey, with));
+            Text[itemID] = new FuncQuoteProvider(() => Language.GetTextValueWith(customKey, with));
             return this;
         }
 
@@ -143,23 +147,29 @@ namespace ShopQuotesMod
 
         public QuoteData AddDefaultText(Func<int, string> findDefault)
         {
-            if (FindDefaultText == null)
-                FindDefaultText = new List<Func<int, string>>();
-
-            FindDefaultText.Add(findDefault);
+            (FindDefaultText ??= new List<Func<int, string>>()).Add(findDefault);
             return this;
         }
 
-        public QuoteData UseColor(Func<Color> color)
+        public QuoteData UseColor(Func<QuoteData, int, int, Color> color)
         {
             ColorMethod = color;
             return this;
         }
 
+        public QuoteData UseColor(Func<int, int, Color> color)
+        {
+            return UseColor((parent, npcID, itemID) => color(npcID, itemID));
+        }
+
+        public QuoteData UseColor(Func<Color> color)
+        {
+            return UseColor((parent, npcID, itemID) => color());
+        }
+
         public QuoteData UseColor(Color color)
         {
-            ColorMethod = () => color;
-            return this;
+            return UseColor((parent, npcID, itemID) => color);
         }
     }
 }

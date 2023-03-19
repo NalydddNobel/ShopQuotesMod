@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace ShopQuotesMod
 {
-    public class ShopQuotesMod : Mod
+    public partial class ShopQuotesMod : Mod
     {
         public static ShopQuotesMod Instance { get; private set; }
 
@@ -17,6 +17,7 @@ namespace ShopQuotesMod
 
         public override void Unload()
         {
+            AutomaticLocalizationPaths.Clear();
             Instance = null;
         }
 
@@ -44,6 +45,7 @@ namespace ShopQuotesMod
             return $"{modNPC.Mod.Name}_{modNPC.Name}";
         }
 
+        #region Helpers
         public static Color MaxRGBA(Color color, byte amt)
         {
             return MaxRGBA(color, amt, amt);
@@ -71,5 +73,6 @@ namespace ShopQuotesMod
             int index = (int)amount;
             return Color.Lerp(colors[index % colors.Length], colors[(index + 1) % colors.Length], amount % 1f);
         }
+        #endregion
     }
 }
