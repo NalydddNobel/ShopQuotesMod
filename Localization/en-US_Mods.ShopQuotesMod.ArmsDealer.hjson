@@ -1,0 +1,36 @@
+SilverBullet:
+	'''
+	Have you seen any werewolves around? 
+	I've been eager to test one of these on them.
+	'''
+TungstenBullet: Heavier and deadlier than your average bullet.
+UnholyArrow:
+	'''
+	Archery ain't really my strong suit, 
+	but I just can't say no to some evil ammo.
+	'''
+FlintlockPistol:
+	'''
+	Might be a little on the antique side, 
+	but I assure it shoots stuff just fine.
+	'''
+IllegalGunParts: No one's watching... Let's keep this between you and me, alright?
+Shotgun: This Ithaca Model 37 is perfect for shooting up monsters up close!
+EmptyBullet:
+	'''
+	I appreciate someone who cares about their bullets, 
+	make up your own with these empty shells!
+	'''
+StyngerBolt: I gotta say, those lihzahrds know how to spice up their game.
+Stake: If you ever see Dracula tell him I said 'Hi'.
+Nail: Don't listen to the Merchant, my nails are way higher caliber!
+Nail_Merchant: Don't listen to {Merchant}, my nails are way higher caliber!
+CandyCorn: I've heard about using sand as ammo but this is getting ridiculous.
+ExplosiveJackOLantern:
+	'''
+	Now, I know explosives are [name of demoman]'s thing but sometimes 
+	you gotta let other people in on the fun y'know?
+	'''
+QuadBarrelShotgun: Double the shotgun, double the things you can kill at once!
+NurseOutfit: Do not tell the Nurse about this, she would kill me!
+NurseOutfit_Nurse: Do not tell {Nurse} about this, she would kill me!

@@ -1,0 +1,69 @@
+MiningHelmet:
+	'''
+	Tired of placing torches every two steps? 
+	Get a mining helmet!
+	'''
+PiggyBank: Use this handy little friend to store your gains!
+PiggyBank_Goober: Use this handy little goober to store your gains!
+IronAnvil:
+	'''
+	That dusty old workbench just isn't doing the trick anymore? 
+	Try this heavy anvil!
+	'''
+LeadAnvil: "{$Mods.ShopQuotesMod.Merchant.IronAnvil}"
+BugNet:
+	'''
+	Ever tried bug catching? 
+	I heard some critters around may be worth lots of gold...
+	'''
+CopperPickaxe:
+	'''
+	The latest on pickaxe technology! 
+	Not to be confused with tin pickaxe.
+	'''
+CopperAxe: Show the ecosystem who's boss with this brand new copper axe!
+LesserHealingPotion:
+	'''
+	Will cure anything from a scratch to a stab! 
+	(Contains Mushroom)
+	'''
+LesserManaPotion:
+	'''
+	Feeling a little magically exhausted? 
+	Get a pack of mana potions!
+	'''
+WoodenArrow:
+	'''
+	Having trouble taking out those flying pests? 
+	Buy a pack of arrows! 
+	'''
+Shuriken: Ninjas may not be real, but you can become the first one today!
+Rope: The adventurers starter kit, only for a few coppers!
+Marshmallow: A bit of sweet in the cold never hurts.
+Furnace: Noticing a worrying lack of rocks? If so, I have just the thing you need.
+PinWheel: You wouldn't believe how much these sell on windy days!
+ThrowingKnife: Not comfortable in close combat? Try throwing knives instead!
+Glowstick: Glows in the dark AND in the wet!
+SharpeningStation: Help your blades in ship shape with this exclusive sharpening station!
+Safe: Keep your goodies safe with this Safe.
+DiscoBall: You can't have a dance without this!
+DiscoBall_PartyGirl:
+	'''
+	Hey, tell {PartyGirl} about this one, 
+	she'd buy my entire stock!
+	'''
+Flare: I noticed you were carrying that flare gun, how about some flares to go along with it?
+BlueFlare: Flares also come in blue!
+Sickle: Only the sickle.
+GoldDust:
+	'''
+	Get some gold for a few silvers, 
+	it doesn't get cheaper than this!
+	'''
+DrumSet:
+	'''
+	Let out your musical creativity with this drum set! 
+	Drumsticks not included.
+	'''
+DrumStick: Complete your set with these Hickory wood drumsticks.
+Nail: Nail gun's no use with no nails!

@@ -1,0 +1,26 @@
+RocketI: Interested in some explosive munitions?
+RocketII: Interested in some high caliber explosive munitions?
+RocketIII: "{$Mods.ShopQuotesMod.Cyborg.RocketII}"
+RocketIV: "{$Mods.ShopQuotesMod.Cyborg.RocketII}"
+DryRocket: Interested in some canister fitted explosive cluster munitions?
+ProximityMineLauncher:
+	'''
+	This is a precise handheld proximity landmine launcher.
+	To reach maximum efficiency wait for the mines to be fully armed.
+	'''
+Nanites: These Nanobots of my own design can be directly injected into any lifeform. For any purpose.
+ClusterRocketI: Interested in some explosive cluster munitions?
+ClusterRocketII: Interested in some high caliber explosive munitions?
+HiTekSunglasses: Martian fashion. The invaders seem to have left some of their wardrobe behind.
+NightVisionHelmet:
+	'''
+	Martian fashion. The invaders seem to have left some of their wardrobe behind. 
+	Reports show it had animated nearby rocks aswell.
+	'''
+PortalGunStation: That Quantum tunneling device of yours could use some automation.
+EchoBlock:
+	'''
+	After experimenting with invisible energy particles I managed to convert them into a solid state.
+	May prove useful in building.
+	'''
+SpectreGoggles: These modified visual receptors may help you study and interact with strange invisible anomalies.

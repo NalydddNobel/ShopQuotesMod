@@ -23,7 +23,7 @@ namespace ShopQuotesMod
 
         public static string GetItemKeyName(int itemID, Mod myMod = null)
         {
-            if (itemID < Main.maxItemTypes)
+            if (itemID < ItemID.Count)
                 return ItemID.Search.GetName(itemID);
 
             var modItem = ItemLoader.GetItem(itemID);
@@ -35,7 +35,7 @@ namespace ShopQuotesMod
 
         public static string GetNPCKeyName(int npcID, Mod myMod = null)
         {
-            if (npcID < Main.maxNPCTypes)
+            if (npcID < NPCID.Count)
                 return NPCID.Search.GetName(npcID);
 
             var modNPC = NPCLoader.GetNPC(npcID);
